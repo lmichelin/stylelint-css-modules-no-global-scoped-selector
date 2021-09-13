@@ -1,0 +1,52 @@
+:global .global {
+  display: none;
+}
+
+h1 {
+  :global .global {
+    display: none;
+  }
+}
+
+.local,
+h1 {
+  :global .global {
+    display: none;
+  }
+}
+
+h1 {
+  :global .global {
+    display: none;
+  }
+
+  :global .global {
+    display: none;
+  }
+}
+
+h1 {
+  :global .global,
+  :global .global,
+  :global .global {
+    display: none;
+  }
+}
+
+%common {
+  display: none;
+}
+
+h1 {
+  @extend %common;
+}
+
+@keyframes :global(global) {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}

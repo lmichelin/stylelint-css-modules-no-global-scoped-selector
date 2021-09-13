@@ -1,0 +1,45 @@
+{
+  "name": "stylelint-css-modules-no-global-scoped-selector",
+  "version": "1.0.0",
+  "description": "Stylelint rule for CSS modules to prevent usage of global-scoped selectors",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 --ignore-path .gitignore .",
+    "lint:fix": "eslint --max-warnings 0 --fix --ignore-path .gitignore .",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmichelin/stylelint-css-modules-no-global-scoped-selector.git"
+  },
+  "keywords": [
+    "stylelint",
+    "css-modules"
+  ],
+  "author": "Louis-Marie Michelin",
+  "license": "ISC",
+  "homepage": "https://github.com/lmichelin/stylelint-css-modules-no-global-scoped-selector#readme",
+  "bugs": {
+    "url": "https://github.com/lmichelin/stylelint-css-modules-no-global-scoped-selector/issues"
+  },
+  "peerDependencies": {
+    "stylelint": "^13.0.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "postcss-modules-local-by-default": "3.0.3",
+    "postcss-resolve-nested-selector": "^0.1.1",
+    "rewire": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/jest-preset-stylelint": "^3.0.1",
+    "@types/stylelint": "^13.13.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.2.0",
+    "jest-preset-stylelint": "^4.1.1",
+    "prettier": "^2.4.0",
+    "stylelint": "^13.13.1"
+  }
+}

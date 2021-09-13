@@ -1,0 +1,44 @@
+.local :global .global {
+  display: none;
+}
+
+.local {
+  :global .global {
+    display: none;
+  }
+}
+
+.local,
+.local {
+  :global .global {
+    display: none;
+  }
+}
+
+.local {
+  :global .global {
+    display: none;
+  }
+
+  :global .global {
+    display: none;
+  }
+}
+
+%common {
+  display: none;
+}
+
+.local {
+  @extend %common;
+}
+
+@keyframes local {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}

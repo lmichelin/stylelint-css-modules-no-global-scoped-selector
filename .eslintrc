@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": ["plugin:prettier/recommended"],
+  "parserOptions": { "ecmaVersion": 2018 },
+  "rules": {
+    "eqeqeq": "error",
+    "no-shadow": "error",
+    "no-unreachable": "error",
+    "no-console": "warn"
+  }
+}

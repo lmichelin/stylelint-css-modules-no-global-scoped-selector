@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: Yarn-packages-${{ hashFiles('yarn.lock') }}
+
+      - name: Install Yarn dependencies
+        run: yarn
+
+      - name: Lint source code
+        run: yarn lint
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Read version from package.json
+        id: package_version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "package.json"
+          prop_path: "version"
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create ${{ steps.package_version.outputs.prop }}
+
+      - name: Publish package to NPM
+        if: github.ref == 'refs/heads/master'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish

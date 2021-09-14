@@ -45,7 +45,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create ${{ steps.package_version.outputs.prop }}
+        run: gh release create v${{ steps.package_version.outputs.prop }}
 
       - name: Publish package to NPM
         if: github.ref == 'refs/heads/master'

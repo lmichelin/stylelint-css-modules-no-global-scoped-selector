@@ -15,6 +15,7 @@ const messages = ruleMessages(ruleName, {
   rejectedKeyframes: "@keyframes :global(...) is not scoped locally",
   rejectedSelector: selector =>
     `Selector "${selector}" is not scoped locally (scoped selectors must contain at least one local class or id)`,
+  localizeNodeError: (selector, errorMessage) => `Error in selector "${selector}": ${errorMessage}`,
 })
 
 module.exports = stylelint.createPlugin(ruleName, (isEnabled, options) => (root, result) => {
@@ -85,17 +86,27 @@ module.exports = stylelint.createPlugin(ruleName, (isEnabled, options) => (root,
 
         clonedRule.selector = resolvedSelector
 
-        const context = localizeNode(clonedRule, "pure", localAliasMap)
+        let message
 
-        if (context.hasPureGlobals) {
-          report({
-            ruleName,
-            result,
-            message: messages.rejectedSelector(resolvedSelector),
-            node: rule,
-            word: splitRule.slice(selectorIndex).join(",").trim(),
-          })
+        try {
+          const context = localizeNode(clonedRule, "pure", localAliasMap)
+
+          if (context.hasPureGlobals) {
+            message = messages.rejectedSelector(resolvedSelector)
+          }
+        } catch (error) {
+          message = messages.localizeNodeError(resolvedSelector, error.message ? error.message : error)
         }
+
+        if (!message) return
+
+        report({
+          ruleName,
+          result,
+          message,
+          node: rule,
+          word: splitRule.slice(selectorIndex).join(",").trim(),
+        })
       })
     })
   })

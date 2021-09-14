@@ -132,5 +132,16 @@ testRule({
       description: "global keyframes",
       warnings: [{ message: messages.rejectedKeyframes, line: 1, column: 12 }],
     },
+    {
+      code: ":global.global { display: none; }",
+      description: "syntax error: missing space after :global",
+      warnings: [
+        {
+          message: messages.localizeNodeError(":global.global", "Missing whitespace after :global"),
+          line: 1,
+          column: 1,
+        },
+      ],
+    },
   ],
 })

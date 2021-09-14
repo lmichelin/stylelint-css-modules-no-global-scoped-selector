@@ -1,6 +1,6 @@
 {
   "name": "stylelint-css-modules-no-global-scoped-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stylelint rule for CSS modules to prevent usage of global-scoped selectors",
   "main": "index.js",
   "scripts": {
